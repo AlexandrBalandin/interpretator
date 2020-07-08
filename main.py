@@ -8,16 +8,20 @@ def main():
         import sys
         text = open(sys.argv[1], 'r').read()
         lexer = Lexer(text)
-        parser = SyntaxAnalyzer(lexer)
-        tree = parser.parse()
-        semantic_analyzer = SemanticAnalyzer()
         try:
-            semantic_analyzer.visit(tree)
+            parser = SyntaxAnalyzer(lexer)
+            tree = parser.parse()
+            semantic_analyzer = SemanticAnalyzer()
+            try:
+                semantic_analyzer.visit(tree)
 
-            interpreter = Interpreter(tree)
-            interpreter.interpret()
-            for k, v in sorted(interpreter.GLOBAL_MEMORY.items()):
-                print('{} = {}'.format(k, v))
+                interpreter = Interpreter(tree)
+                interpreter.interpret()
+                for k, v in sorted(interpreter.GLOBAL_MEMORY.items()):
+                    print('{} = {}'.format(k, v))
+            except Exception as e:
+                print(e)
+
         except Exception as e:
             print(e)
 
