@@ -15,11 +15,9 @@ class Interpreter(NodeVisitor):
         self.visit(node.compound_statement)
 
     def visit_VarDecl(self, node):
-        # Do nothing
         pass
 
     def visit_Type(self, node):
-        # Do nothing
         pass
 
     def visit_BinOp(self, node):

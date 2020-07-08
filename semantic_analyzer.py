@@ -7,6 +7,9 @@ class SemanticAnalyzer(NodeVisitor):
     def __init__(self):
         self.symtab = SymbolTable()
 
+    def visit_Num(self, node):
+        pass
+
     def visit_Block(self, node):
         for declaration in node.declarations:
             self.visit(declaration)

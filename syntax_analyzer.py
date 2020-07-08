@@ -25,7 +25,6 @@ class UnaryOp(AST):
 
 
 class Compound(AST):
-
     def __init__(self):
         self.children = []
 
@@ -38,7 +37,6 @@ class Assign(AST):
 
 
 class Var(AST):
-
     def __init__(self, token):
         self.token = token
         self.value = token.value
@@ -110,7 +108,6 @@ class SyntaxAnalyzer(object):
 
     def declarations(self):
         declarations = []
-
         while True:
             if self.current_token.type == VAR:
                 self.eat(VAR)
@@ -134,7 +131,7 @@ class SyntaxAnalyzer(object):
         return declarations
 
     def variable_declaration(self):
-        var_nodes = [Var(self.current_token)]  # first ID
+        var_nodes = [Var(self.current_token)]
         self.eat(ID)
 
         while self.current_token.type == COMMA:
@@ -263,32 +260,6 @@ class SyntaxAnalyzer(object):
             return node
 
     def parse(self):
-        """
-        program : PROGRAM variable SEMI block DOT
-        block : declarations compound_statement
-        declarations : VAR (variable_declaration SEMI)+
-                     | (PROCEDURE ID SEMI block SEMI)*
-                     | empty
-        variable_declaration : ID (COMMA ID)* COLON type_spec
-        type_spec : INTEGER
-        compound_statement : BEGIN statement_list END
-        statement_list : statement
-                       | statement SEMI statement_list
-        statement : compound_statement
-                  | assignment_statement
-                  | empty
-        assignment_statement : variable ASSIGN expr
-        empty :
-        expr : term ((PLUS | MINUS) term)*
-        term : factor ((MUL | INTEGER_DIV | FLOAT_DIV) factor)*
-        factor : PLUS factor
-               | MINUS factor
-               | INTEGER_CONST
-               | REAL_CONST
-               | LPAREN expr RPAREN
-               | variable
-        variable: ID
-        """
         node = self.program()
         if self.current_token.type != EOF:
             self.error()

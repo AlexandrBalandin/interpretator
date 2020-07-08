@@ -5,5 +5,4 @@ class NodeVisitor(object):
         return visitor(node)
 
     def generic_visit(self, node):
-        pass
         raise Exception('No visit_{} method'.format(type(node).__name__))

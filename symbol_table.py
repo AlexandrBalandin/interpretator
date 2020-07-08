@@ -24,11 +24,10 @@ class SymbolTable(object):
     __repr__ = __str__
 
     def insert(self, symbol):
-        print('Insert: %s' % symbol.name)
+        #print('Insert: %s' % symbol.name)
         self._symbols[symbol.name] = symbol
 
     def lookup(self, name):
-        print('Lookup: %s' % name)
+        #print('Lookup: %s' % name)
         symbol = self._symbols.get(name)
-        # 'symbol' is either an instance of the Symbol class or None
         return symbol
